@@ -4,11 +4,15 @@ You want to find a playmate for your dog, preferably of the same breed. So you w
 of the 15 people have the same breed as your dog. You stand up and yell out, who here has a golden retriever
 and would like to be a playdate for my golden. Someone yells - "I do, be happy to bring him over"
 
+O(1)
+
 2) Determine the Big O for the following algorithm: You are sitting in a room with 15 people. 
 You want to find a playmate for your dog who is of the same breed. So you want to know if anyone out of 
 the 15 people have the same breed as your dog. You start with the first person and ask him if he has a 
 golden retriever. He says no, then you ask the next person, and the next, and the next until you find 
 someone who has a golden or there is no one else to ask.
+
+O(n)
 
 2. Even or odd
 What is the Big O of the following algorithm? Explain your answer
@@ -21,6 +25,9 @@ function isEven(value) {
         return false;
     }
 }
+
+O(1) Because it is doing 1 operation that doesn't increase based on input size.
+
 3. Are you here?
 What is the Big O of the following algorithm? Explain your answer
 
@@ -34,6 +41,10 @@ function areYouHere(arr1, arr2) {
     }
     return false;
 }
+
+O(^2) Each loop is O(n) on it's own but because the second one will run again for each time the outer one
+does, it is like n * n or n^2.
+
 4. Doubler
 What is the Big O of the following algorithm? Explain your answer
 
@@ -43,6 +54,9 @@ function doubleArrayValues(array) {
     }
     return array;
 }
+
+O(n) A for loop has n runtime complexity because it grows linearly to the size of the input.
+
 5. Naive search
 What is the Big O of the following algorithm? Explain your answer
 
@@ -53,6 +67,10 @@ function naiveSearch(array, item) {
         }
     }
 }
+
+O(n) Again because it is a single loop essentially doing a single operation per run. It grows linearly to the
+input size.
+
 6. Creating pairs:
 What is the Big O of the following algorithm? Explain your answer
 
@@ -63,6 +81,10 @@ function createPairs(arr) {
         }
     }
 }
+
+O(n^2) Nested loops will grow exponentially based on the input because the inner loop will run however many
+times based on the input and how many times the outer loop runs.
+
 7. Compute the sequence
 What does the following algorithm do? What is its runtime complexity? Explain your answer
 
@@ -82,8 +104,14 @@ function compute(num) {
     }
     return result;
 }
+
+It is generating the fibonacci sequence iteratively (0,1,1,2,3,5,8,13...). O(n) would be the runtime 
+complexity because it grows linear to the input.
+
 8. An efficient search
-In this example, we return to the problem of searching using a more sophisticated approach than in naive search, above. Assume that the input array is always sorted. What is the Big O of the following algorithm? Explain your answer
+In this example, we return to the problem of searching using a more sophisticated approach than in naive 
+search, above. Assume that the input array is always sorted. What is the Big O of the following algorithm? 
+Explain your answer
 
 function efficientSearch(array, item) {
     let minIndex = 0;
@@ -107,12 +135,18 @@ function efficientSearch(array, item) {
     }
     return -1;
 }
+
+O(log(n)) Because with each iteration it is splitting the problem in half.
+
 9. Random element
 What is the Big O of the following algorithm? Explain your answer
 
 function findRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
+
+O(1) because it doesn't matter the size of the array, it is going to pick a random number and return.
+
 10. What Am I?
 What does the following algorithm do? What is the Big O of the following algorithm? Explain your answer
 
@@ -125,6 +159,9 @@ function isWhat(n) {
     }
     return true;
 }
+
+It is checking for prime numbers. It's Big O is O(n) because it grows linear to the input number.
+
 11. Tower of Hanoi
 The Tower of Hanoi is a very famous mathematical puzzle (some call it game!). This is how it goes:
 
@@ -145,18 +182,48 @@ Rod A	Rod B	Rod C
 Output:
 
 Rod A	Rod B	Rod C
-----
----------
--------------
+            ----
+            ---------
+            -------------
+
+Rod A	Rod B	Rod C
+            ----	
+            -----	
+            ---------	
+----------	
+-------------		
+
 Derive an algorithm to solve the Tower of Hanoi puzzle.
 Implement your algorithm using recursion. Your program should display each movement of the disk from one 
 rod to another.
-If you are given 5 disks, how do the rods look like after 7 recursive calls?
-How many moves are needed to complete the puzzle with 3 disks? with 4 disks? with 5 disks?
-What is the runtime of your algorithm?
+If you are given 5 disks, how do the rods look like after 7 recursive calls? 
+  The two bigger rings on Rod A and the 3 smaller rings on Rod C.
+How many moves are needed to complete the puzzle 
+  with 3 disks? 7 moves.
+  with 4 disks? 15 moves. 
+  with 5 disks? 31 moves.
+What is the runtime of your algorithm? O(n^2)
+*/
+
+function towerOfHanoi(height, start, middle, end) {
+  if(height >= 1) {
+    towerOfHanoi(height - 1, start, end, middle);
+    console.log('Move disk from Rod ', start, ' to Rod ', end);
+    towerOfHanoi(height - 1, middle, start, end);
+  }
+  return;
+}
+
+towerOfHanoi(4, 'A', 'B', 'C', 1)
+
+/*
 12. Iterative version
 Solve the drills 1 - 7 from your previous checkpoint (Recursion) iteratively.
+*/
 
+
+
+/* 
 13. Recursive Big O
 Take your solutions from the recursive exercises that you completed in the previous checkpoint and identify 
 the time complexities (big O) of each of them.
